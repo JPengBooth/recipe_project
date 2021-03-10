@@ -16,13 +16,15 @@
 
     <form action="/insert_recipe" method="post">
       <div>
-        <label for="user_id_box">
-          User
+        <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @current_user.id%>">
+      </div>
+      <div>
+        <label for="name_box">
+          Name
         </label>
 
-        <input type="text" id="user_id_box" name="query_user_id">
+        <input type="Text" id="name_box" name="query_name" placeholder="Enter a recipe name...">
       </div>
-
       <div>
         <label for="details_box">
           Details
@@ -36,7 +38,15 @@
           Food categories
         </label>
 
-        <input type="text" id="food_categories_box" name="query_food_categories">
+        <select id="food_categories_box" name="query_food_categories">
+          <option>Pastries</option>
+          <option>Soup</option>
+          <option>Pasta</option>
+          <option>Pizza</option>
+          <option>Stew</option>
+          <option>Salad</option>
+        </select>
+
       </div>
 
       <button>

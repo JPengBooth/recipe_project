@@ -2,8 +2,17 @@
 
 <hr>
 
-<h2>Yoru favourites</h2>
+<h2>Your favourites</h2>
 
+<table>
+  <tr>
+    <% @current_user_bookmark.each do |a_bookmark| %>
+    <td>
+      <%= a_bookmark.recipe.name%>
+    </td>
+    <% end %>
+  </tr>
+</table>
 
 <h2>Fresh new recipes</h2>
 

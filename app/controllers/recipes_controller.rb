@@ -23,12 +23,10 @@ class RecipesController < ApplicationController
     the_recipe.details = params.fetch("query_details")
     the_recipe.food_categories = params.fetch("query_food_categories")
 
-    if the_recipe.valid?
-      the_recipe.save
-      redirect_to("/recipes", { :notice => "Recipe created successfully." })
-    else
-      redirect_to("/recipes", { :notice => "Recipe failed to create successfully." })
-    end
+  
+    the_recipe.save
+    redirect_to("/recipes", { :notice => "Recipe created successfully." })
+    
   end
 
   def update

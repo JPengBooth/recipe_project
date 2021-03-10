@@ -11,7 +11,7 @@
 class Bookmark < ApplicationRecord
   belongs_to(:user, { :required => false, :class_name => "User", :foreign_key => "user_id" })
 
-  belongs_to(:recipe, { :required => false, :class_name => "Recipe", :foreign_key => "recipe_id", :counter_cache => true })
+  belongs_to(:recipe, { :required => false, :class_name => "Recipe", :foreign_key => "recipe_id"})
 
   validates(:user_id, { :presence => true })
   validates(:recipe_id, { :presence => true })

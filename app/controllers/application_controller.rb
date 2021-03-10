@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   def load_current_user
     the_id = session[:user_id]
     @current_user = User.where({ :id => the_id }).first
+    @current_user_bookmark = Bookmark.where({ :user_id => @current_user.id})
   end
   
   def force_user_sign_in
