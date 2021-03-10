@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all allergies
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new allergy
+    </h2>
+
+    <form action="/insert_allergy" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="ingredient_id_box">
+          Ingredient
+        </label>
+
+        <input type="text" id="ingredient_id_box" name="query_ingredient_id">
+      </div>
+
+      <div>
+        <label for="severity_box">
+          Severity
+        </label>
+
+        <input type="text" id="severity_box" name="query_severity">
+      </div>
+
+      <button>
+        Create allergy
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Ingredient
+        </th>
+
+        <th>
+          Severity
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_allergies.each do |an_allergy| %>
+      <tr>
+        <td>
+          <%= an_allergy.id %>
+        </td>
+
+        <td>
+          <%= an_allergy.user_id %>
+        </td>
+
+        <td>
+          <%= an_allergy.ingredient_id %>
+        </td>
+
+        <td>
+          <%= an_allergy.severity %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_allergy.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_allergy.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/allergies/<%= an_allergy.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

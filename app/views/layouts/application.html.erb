@@ -16,6 +16,41 @@
   </head>
 
   <body>
+    <nav>
+      <% if @current_user == nil %>
+        <div>
+          <a href="/user_sign_in">Log in</a>
+        </div>
+        <div>
+          <a href="/">Explore</a>
+        </div>
+        <div>
+        <a href="/recipes">Recipes</a>
+        </div>
+        <div>
+        <a href="/ingredients">Ingredients</a>
+        </div>
+      <% else %>
+        <div>
+          <a href="/allergies">My profile</a>
+        </div>
+        <div>
+          <a href="/bookmarks">My favourites</a>
+        </div>
+        <div>
+          <a href="/">Explore</a>
+        </div>
+        <div>
+        <a href="/recipes">Recipes</a>
+        </div>
+        <div>
+        <a href="/ingredients">Ingredients</a>
+        </div>
+        <div>
+          <a href="/user_sign_out">Sign out</a>
+        </div>
+      <% end %>
+    </nav>
     <%= yield %>
   </body>
 </html>

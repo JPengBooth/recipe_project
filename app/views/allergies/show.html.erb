@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Allergy #<%= @the_allergy.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/allergies">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_allergy/<%= @the_allergy.id %>">
+          Delete allergy
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_allergy.user_id %>
+      </dd>
+
+      <dt>
+        Ingredient
+      </dt>
+      <dd>
+        <%= @the_allergy.ingredient_id %>
+      </dd>
+
+      <dt>
+        Severity
+      </dt>
+      <dd>
+        <%= @the_allergy.severity %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_allergy.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_allergy.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit allergy
+    </h2>
+
+    <form action="/modify_allergy/<%= @the_allergy.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_allergy.user_id %>">
+      </div>
+
+      <div>
+        <label for="ingredient_id_box">
+          Ingredient
+        </label>
+
+        <input type="text" id="ingredient_id_box" name="query_ingredient_id" value="<%= @the_allergy.ingredient_id %>">
+      </div>
+
+      <div>
+        <label for="severity_box">
+          Severity
+        </label>
+
+        <input type="text" id="severity_box" name="query_severity" value="<%= @the_allergy.severity %>">
+      </div>
+
+      <button>
+        Update allergy
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

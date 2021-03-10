@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all usages
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new usage
+    </h2>
+
+    <form action="/insert_usage" method="post">
+      <div>
+        <label for="recipe_id_box">
+          Recipe
+        </label>
+
+        <input type="text" id="recipe_id_box" name="query_recipe_id">
+      </div>
+
+      <div>
+        <label for="ingredient_id_box">
+          Ingredient
+        </label>
+
+        <input type="text" id="ingredient_id_box" name="query_ingredient_id">
+      </div>
+
+      <div>
+        <label for="amount_box">
+          Amount
+        </label>
+
+        <input type="text" id="amount_box" name="query_amount">
+      </div>
+
+      <button>
+        Create usage
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Recipe
+        </th>
+
+        <th>
+          Ingredient
+        </th>
+
+        <th>
+          Amount
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_usages.each do |an_usage| %>
+      <tr>
+        <td>
+          <%= an_usage.id %>
+        </td>
+
+        <td>
+          <%= an_usage.recipe_id %>
+        </td>
+
+        <td>
+          <%= an_usage.ingredient_id %>
+        </td>
+
+        <td>
+          <%= an_usage.amount %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_usage.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_usage.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/usages/<%= an_usage.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
