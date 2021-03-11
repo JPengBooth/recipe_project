@@ -16,11 +16,7 @@
 
     <form action="/insert_allergy" method="post">
       <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
+        <input type="hidden" id="user_id_box" name="query_user_id" value="<%=@current_user.id%>">
       </div>
 
       <div>
@@ -36,7 +32,11 @@
           Severity
         </label>
 
-        <input type="text" id="severity_box" name="query_severity">
+        <select type="text" id="severity_box" name="query_severity">
+          <option>Mild</option>
+          <option>Not great</option>
+          <option>Total Disaster</option>
+        </select>
       </div>
 
       <button>
@@ -51,14 +51,6 @@
   <div>
     <table>
       <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          User
-        </th>
-
         <th>
           Ingredient
         </th>
@@ -80,17 +72,10 @@
       </tr>
 
       <% @list_of_allergies.each do |an_allergy| %>
+      <% ingredient = Ingredient.where({ :id => an_allergy.ingredient_id}).first %>
       <tr>
         <td>
-          <%= an_allergy.id %>
-        </td>
-
-        <td>
-          <%= an_allergy.user_id %>
-        </td>
-
-        <td>
-          <%= an_allergy.ingredient_id %>
+          <%= ingredient.name %>
         </td>
 
         <td>
@@ -105,7 +90,7 @@
         </td>
 
         <td>
-          <a href="/allergies/<%= an_allergy.id %>">
+          <a href="/ingredients/<%= ingredient.id %>">
             Show details
           </a>
         </td>

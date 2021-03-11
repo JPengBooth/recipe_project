@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all bookmarks
+      My Favorite Recipes
     </h1>
   </div>
 </div>
@@ -9,46 +9,14 @@
 <hr>
 
 <div>
-  <div>
-    <h2>
-      Add a new bookmark
-    </h2>
-
-    <form action="/insert_bookmark" method="post">
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div>
-
-      <div>
-        <label for="recipe_id_box">
-          Recipe
-        </label>
-
-        <input type="text" id="recipe_id_box" name="query_recipe_id">
-      </div>
-
-      <button>
-        Create bookmark
-      </button>
-    </form>
-  </div>
 </div>
 
-<hr>
 <div>
   <div>
-    <table>
+    <table border="1">
       <tr>
         <th>
-          ID
-        </th>
-
-        <th>
-          User
+          
         </th>
 
         <th>
@@ -70,15 +38,10 @@
       <% @list_of_bookmarks.each do |a_bookmark| %>
       <tr>
         <td>
-          <%= a_bookmark.id %>
+          <img src="<%= a_bookmark.recipe.photo %>" width="200" height="270">
         </td>
-
         <td>
-          <%= a_bookmark.user_id %>
-        </td>
-
-        <td>
-          <%= a_bookmark.recipe_id %>
+          <%= a_bookmark.recipe.name %>
         </td>
 
         <td>
@@ -89,7 +52,7 @@
         </td>
 
         <td>
-          <a href="/bookmarks/<%= a_bookmark.id %>">
+          <a href="/recipes/<%= a_bookmark.recipe_id %>">
             Show details
           </a>
         </td>

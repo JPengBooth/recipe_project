@@ -6,6 +6,7 @@
 #  details         :string
 #  food_categories :string
 #  name            :string
+#  photo           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  user_id         :integer
@@ -18,5 +19,6 @@ class Recipe < ApplicationRecord
   has_many(:bookmarks, { :class_name => "Bookmark", :foreign_key => "recipe_id", :dependent => :destroy })
 
   validates(:food_categories, { :presence => true })
+  validates(:name, { :uniqueness => true })
   validates(:details, { :presence => true })
 end

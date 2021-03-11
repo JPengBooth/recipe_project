@@ -2,18 +2,35 @@
 
 <hr>
 
-<h2>Your favourites</h2>
+<% if @current_user == nil %>
 
-<table>
-  <tr>
-    <% @current_user_bookmark.each do |a_bookmark| %>
-    <td>
-      <%= a_bookmark.recipe.name%>
-    </td>
-    <% end %>
-  </tr>
-</table>
+  <div>
+  </div>
+
+<% else %>
+  <h2>Your favourites</h2>
+
+  <table>
+    <tr>
+      <% @current_user_bookmark.each do |a_bookmark| %>
+      <td>
+        <img src="<%= a_bookmark.recipe.photo %>" width="200" height="270">
+      </td>
+      <td>
+        <%= a_bookmark.recipe.name %>
+      </td>
+      <td>
+        <a href="/recipes/<%= a_bookmark.recipe.id %>">Let make it!</a>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+
+<% end %>
+
+<h2>Recommended for you with care</h2>
+
 
 <h2>Fresh new recipes</h2>
 
-<h2>Popular recipes</h2>
+

@@ -14,19 +14,29 @@ class RecipesController < ApplicationController
 
     @the_recipe = matching_recipes.at(0)
 
+    @matching_usage = Usage.where({ :recipe_id => @the_recipe.id}) 
+
+    #new_ingredient_name = params.fetch("query_name")
+
+    #@the_ingredient = Ingredient.where({ :name => new_ingredient_name})
+
     render({ :template => "recipes/show.html.erb" })
   end
 
   def create
     the_recipe = Recipe.new
     the_recipe.user_id = params.fetch("query_user_id")
+    the_recipe.photo = params.fetch("query_photo")
+    the_recipe.name = params.fetch("query_name")
     the_recipe.details = params.fetch("query_details")
     the_recipe.food_categories = params.fetch("query_food_categories")
 
-  
-    the_recipe.save
-    redirect_to("/recipes", { :notice => "Recipe created successfully." })
-    
+    if the_recipe.valid?
+      the_recipe.save
+      redirect_to("/recipes/#{the_recipe.id}", { :notice => "Recipe created successfully, please complete Ingedient List" })
+    else
+      redirect_to("/recipes/", { :alert => "Name already exists." })
+    end
   end
 
   def update

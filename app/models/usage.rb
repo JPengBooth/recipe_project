@@ -12,7 +12,7 @@
 class Usage < ApplicationRecord
   belongs_to(:recipe, { :required => false, :class_name => "Recipe", :foreign_key => "recipe_id" })
 
-  belongs_to(:ingredient, { :required => false, :class_name => "Ingredient", :foreign_key => "ingredient_id", :counter_cache => true })
+  belongs_to(:ingredient, { :required => false, :class_name => "Ingredient", :foreign_key => "ingredient_id" })
 
   validates(:recipe_id, { :presence => true })
   validates(:ingredient_id, { :presence => true })

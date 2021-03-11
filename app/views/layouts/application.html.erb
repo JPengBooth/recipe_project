@@ -25,7 +25,7 @@
           <a href="/">Explore</a>
         </div>
         <div>
-        <a href="/recipes">Recipes</a>
+        <a href="/recipes">All Recipes</a>
         </div>
         <div>
         <a href="/ingredients">Ingredients</a>
@@ -41,7 +41,7 @@
           <a href="/">Explore</a>
         </div>
         <div>
-        <a href="/recipes">Recipes</a>
+        <a href="/recipes">All Recipes</a>
         </div>
         <div>
         <a href="/ingredients">Ingredients</a>
@@ -51,6 +51,21 @@
         </div>
       <% end %>
     </nav>
+
+    <hr>
+
+    <% if notice.present? %>
+      <div style="border: thin green solid; color: green">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div style="border: thin red solid; color: red">
+        <%= alert %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

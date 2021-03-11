@@ -13,7 +13,7 @@ class Allergy < ApplicationRecord
 
   belongs_to(:user, { :required => false, :class_name => "User", :foreign_key => "user_id" })
 
-  belongs_to(:ingredient, { :required => false, :class_name => "Ingredient", :foreign_key => "ingredient_id", :counter_cache => true })
+  belongs_to(:ingredient, { :required => false, :class_name => "Ingredient", :foreign_key => "ingredient_id" })
 
   validates(:user_id, { :presence => true })
   validates(:severity, { :presence => true })

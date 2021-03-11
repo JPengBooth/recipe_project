@@ -16,8 +16,17 @@
 
     <form action="/insert_recipe" method="post">
       <div>
+        <label for="photo_box">
+          Photo
+        </label>
+
+        <input type="text" id="photo_box" name="query_photo" placeholder="Enter a photo_URL">
+      </div>
+
+      <div>
         <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @current_user.id%>">
       </div>
+
       <div>
         <label for="name_box">
           Name
@@ -25,6 +34,7 @@
 
         <input type="Text" id="name_box" name="query_name" placeholder="Enter a recipe name...">
       </div>
+
       <div>
         <label for="details_box">
           Details
@@ -59,14 +69,15 @@
 <hr>
 <div>
   <div>
-    <table>
+    <table border="1">
       <tr>
+        <th></th>
         <th>
-          ID
+          User
         </th>
 
         <th>
-          User
+          Recipe Name
         </th>
 
         <th>
@@ -82,21 +93,20 @@
         </th>
 
         <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
       <% @list_of_recipes.each do |a_recipe| %>
       <tr>
         <td>
-          <%= a_recipe.id %>
+          <img src="<%= a_recipe.photo %>" width="200" height="270">
+        </td>
+        <td>
+          <%= a_recipe.user.user_name %>
         </td>
 
         <td>
-          <%= a_recipe.user_id %>
+          <%= a_recipe.name %>
         </td>
 
         <td>
@@ -109,9 +119,6 @@
 
         <td>
           <%= time_ago_in_words(a_recipe.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_recipe.updated_at) %> ago
         </td>
 
         <td>
