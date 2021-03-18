@@ -1,0 +1,66 @@
+<h1> Recipes with <%= @the_ingredient.name%> </h1>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th></th>
+        
+        <th>
+          Recipe Name
+        </th>
+
+        <th>
+          Details
+        </th>
+
+        <th>
+          Food categories
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @matching_recipes.each do |a_recipe| %>
+      <tr>
+        <td>
+          <img src="<%= a_recipe.photo %>" width="200" height="270">
+        </td>
+        <td>
+          <%= a_recipe.user.user_name %>
+        </td>
+
+        <td>
+          <%= a_recipe.name %>
+        </td>
+
+        <td>
+          <%= a_recipe.details %>
+        </td>
+
+        <td>
+          <%= a_recipe.food_categories %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_recipe.created_at) %> ago
+        </td>
+
+        <td>
+          <a href="/recipes/<%= a_recipe.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

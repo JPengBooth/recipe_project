@@ -16,9 +16,19 @@ class RecipesController < ApplicationController
 
     @matching_usage = Usage.where({ :recipe_id => @the_recipe.id}) 
 
-    #new_ingredient_name = params.fetch("query_name")
+    @usage_ingredient = Array.new
+    @matching_usage.each do |a_usage|
+      @usage_ingredient.push(a_usage[:ingredient_id])
+    end
+    
+    @matching_allergies = Allergy.where({ :user_id => @current_user})
+    
+    @allergies = Array.new
+    @matching_allergies.each do |an_allergy|
+      @allergies.push(an_allergy[:ingredient_id])
+    end
 
-    #@the_ingredient = Ingredient.where({ :name => new_ingredient_name})
+    @safe = (@usage_ingredient-@allergies).size == @usage_ingredient.size
 
     render({ :template => "recipes/show.html.erb" })
   end

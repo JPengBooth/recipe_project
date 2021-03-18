@@ -24,7 +24,13 @@
           Ingredient
         </label>
 
-        <input type="text" id="ingredient_id_box" name="query_ingredient_id">
+        <select id="name_box" name="query_ingredient_id">
+          <% Ingredient.all.each do |an_ingredient| %>
+          <option value="<%= an_ingredient.id %>">
+            <%= an_ingredient.name %>
+          </option>
+          <% end %>
+        </select>
       </div>
 
       <div>
@@ -71,11 +77,13 @@
         </th>
       </tr>
 
+    <% if @list_of_allergies == nil%>
+      <div></div>
+    <% else %>
       <% @list_of_allergies.each do |an_allergy| %>
-      <% ingredient = Ingredient.where({ :id => an_allergy.ingredient_id}).first %>
       <tr>
         <td>
-          <%= ingredient.name %>
+          <%= an_allergy.ingredient.name%>
         </td>
 
         <td>
@@ -88,14 +96,9 @@
         <td>
           <%= time_ago_in_words(an_allergy.updated_at) %> ago
         </td>
-
-        <td>
-          <a href="/ingredients/<%= ingredient.id %>">
-            Show details
-          </a>
-        </td>
       </tr>
       <% end %>
+    <% end %>
     </table>
   </div>
 </div>

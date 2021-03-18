@@ -1,4 +1,22 @@
 class IngredientsController < ApplicationController
+  def filter_by_ingredient
+    the_id = params.fetch("path_id")
+
+    matching_ingredients = Ingredient.where({ :id => the_id })
+
+    @the_ingredient = matching_ingredients.at(0)
+
+    matching_usage = Usage.where({ :ingredient_id => the_id})
+
+    @the_usage = matching_usage.first
+
+    @matching_recipes = Recipe.where({ :id => @the_usage.recipe_id})
+
+    render({ :template => "ingredients/recipes_index.html.erb" })
+  end
+
+  
+  
   def index
     matching_ingredients = Ingredient.all
 

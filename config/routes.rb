@@ -59,6 +59,9 @@ Rails.application.routes.draw do
 
   # Routes for the Ingredient resource:
 
+   #recipes containing ingredient
+  get("/ingredients/recipes/:path_id",{ :controller => "ingredients", :action => "filter_by_ingredient"})
+
   # CREATE
   post("/insert_ingredient", { :controller => "ingredients", :action => "create" })
           
@@ -78,6 +81,7 @@ Rails.application.routes.draw do
 
   # Routes for the Recipe resource:
 
+ 
   # CREATE
   post("/insert_recipe", { :controller => "recipes", :action => "create" })
           
@@ -92,6 +96,8 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_recipe/:path_id", { :controller => "recipes", :action => "destroy" })
+
+  
 
   #------------------------------
 

@@ -18,6 +18,8 @@ class Recipe < ApplicationRecord
 
   has_many(:bookmarks, { :class_name => "Bookmark", :foreign_key => "recipe_id", :dependent => :destroy })
 
+  has_many(:ingredients, { :through => :usages, :source => :ingredient })
+
   validates(:food_categories, { :presence => true })
   validates(:name, { :uniqueness => true })
   validates(:details, { :presence => true })

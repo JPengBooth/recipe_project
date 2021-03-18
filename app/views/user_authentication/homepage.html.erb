@@ -25,12 +25,41 @@
       <% end %>
     </tr>
   </table>
-
+  
+  <h2>Recommended for you with care</h2>
+  <table>
+    <tr>
+      <% @safe_recipe.each do |a_recipe_id| %>
+        <% the_recipe = Recipe.where({ :id => a_recipe_id}).first %>
+        <td>
+          <img src="<%= the_recipe.photo %>" width="200" height="270">
+        </td>
+        <td>
+          <%= the_recipe.name %>
+        </td>
+        <td>
+          <a href="/recipes/<%= a_recipe_id %>">Let make it!</a>
+        </td>
+      <% end %>
+    </tr>
+  </table>
 <% end %>
-
-<h2>Recommended for you with care</h2>
 
 
 <h2>Fresh new recipes</h2>
 
-
+<table>
+  <tr>
+    <% @all_recipe.each do |a_recipe| %>
+    <td>
+      <img src="<%= a_recipe.photo %>" width="200" height="270">
+    </td>
+    <td>
+      <%= a_recipe.name %>
+    </td>
+    <td>
+      <a href="/recipes/<%= a_recipe.id %>">Let make it!</a>
+    </td>
+    <% end %>
+  </tr>
+</table>

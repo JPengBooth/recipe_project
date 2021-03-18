@@ -6,9 +6,10 @@
   </div>
 </div>
 
-<hr>
-
-<div>
+<% if @current_user == nil %>
+  <div></div>
+<% else%>
+  <hr>
   <div>
     <h2>
       Add a new ingredient
@@ -28,7 +29,15 @@
           Ingredient class
         </label>
 
-        <input type="text" id="ingredient_class_box" name="query_ingredient_class">
+        <select type="text" id="ingredient_class_box" name="query_ingredient_class">
+          <option>Dairy</option>
+          <option>Carbohydrate</option>
+          <option>Vegetables</option>
+          <option>Meat</option>
+          <option>Fish</option>
+          <option>Seafood</option>
+          <option>Nuts and Seeds</option>
+        </select>
       </div>
 
       <button>
@@ -36,7 +45,7 @@
       </button>
     </form>
   </div>
-</div>
+<% end %>
 
 <hr>
 <div>
@@ -70,10 +79,6 @@
       <% @list_of_ingredients.each do |an_ingredient| %>
       <tr>
         <td>
-          <%= an_ingredient.id %>
-        </td>
-
-        <td>
           <%= an_ingredient.name %>
         </td>
 
@@ -89,8 +94,8 @@
         </td>
 
         <td>
-          <a href="/ingredients/<%= an_ingredient.id %>">
-            Show details
+          <a href="/ingredients/recipes/<%= an_ingredient.id %>">
+            Show recipes
           </a>
         </td>
       </tr>

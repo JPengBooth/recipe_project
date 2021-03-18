@@ -13,6 +13,8 @@ class Ingredient < ApplicationRecord
 
   has_many(:allergies, { :class_name => "Allergy", :foreign_key => "ingredient_id", :dependent => :destroy })
 
+  has_many(:recipes, { :through => :usages, :source => :recipe })
+
   validates(:name, { :presence => true })
   validates(:name, { :uniqueness => true })
 end

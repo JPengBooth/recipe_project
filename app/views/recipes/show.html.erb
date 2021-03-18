@@ -5,6 +5,15 @@
     </h1>
 
     <div>
+      <% if @safe == true %>
+        <div></div>
+      <% else %>
+        <div style="border: thin red solid; color: red">This recipe contains ingredients that you are allergic to!</div>
+      <% end %>
+    </div>
+    
+    <hr>
+    <div>
       <div>
         <a href="/recipes">
           Go back
@@ -12,9 +21,13 @@
       </div>
 
       <div>
-        <a href="/delete_recipe/<%= @the_recipe.id %>">
-          Delete recipe
-        </a>
+        <% if @current_user == nil %>
+          <div></div>
+        <% else %>
+          <a href="/delete_recipe/<%= @the_recipe.id %>">
+            Delete recipe
+          </a>
+        <% end %>
       </div>
 
       <div>
@@ -92,11 +105,10 @@
   </tr>
 
   <% @matching_usage.each do |a_portion| %>
-  <% ingredient = Ingredient.where({ :id => a_portion.ingredient_id}) %>
-  <% ingredient_name = ingredient.name %>
+  <% the_ingredient = Ingredient.where({ :id => a_portion.ingredient_id}).first %>
   <tr>
     <td>
-      <%= ingredient_name %>
+      <%= the_ingredient.name %>
     </td>
 
     <td>
@@ -106,90 +118,95 @@
   <% end %>
 </table>
 
-#need to figure out how to choose ingredient using name drop down
-<form action="/insert_usage"  method="post" >
-  <div>
-    <label for="name_box">
-      Ingredient Name
-    </label>
-    <select id="name_box" name="query_name" value="Apple">
-      <% Ingredient.all.each do |an_ingredient| %>
-        <option>
-          <%= an_ingredient.name%>
-        </option>
-      <% end %>
-    </select>
-  </div>
-
-  <div>
-    <input type="hidden" id="recipe_id_box" name="query_recipe_id" value="<%= @the_recipe.id%>">
-  </div>
-
-  <div>
-    <label for="ingredient_id_box">
-      Ingredient ID
-    </label>
-
-    <input type="text" id="ingredient_id_box" name="query_ingredient_id" value="id">
-  </div>
-
-  <div>
-    <label for="amount">
-      Amount
-    </label>
-
-    <input type="text" id="amount_box" name="query_amount" placeholder="How much to use...">
-  </div>
-
-  <button>
-    Add ingredient
-  </button>
-</form>
-
-
-
-<div>
+<% if @current_user == nil %>
+  <div></div>
+<% else %>
   <% if @current_user.id == @the_recipe.user_id %>  
-    <div>
-      <h2>
-        Edit recipe
-      </h2>
+    <form action="/insert_usage"  method="post" >
+      <div>
+        <label for="name_box">
+          Ingredient Name
+        </label>
+        <select id="name_box" name="query_ingredient_id">
+          <% Ingredient.all.each do |an_ingredient| %>
+            <option value="<%= an_ingredient.id %>">
+              <%= an_ingredient.name %>
+            </option>
+          <% end %>
+        </select>
+      </div>
 
-      <form action="/modify_recipe/<%= @the_recipe.id %>"  method="post" >
-        <div>
-          <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @the_recipe.user_id %>">
-        </div>
+      <div>
+        <input type="hidden" id="recipe_id_box" name="query_recipe_id" value="<%= @the_recipe.id%>">
+      </div>
 
-        <div>
-          <label for="details_box">
-            Details
-          </label>
+      <div>
+        <label for="amount">
+          Amount
+        </label>
 
-          <textarea type="text" id="details_box" name="query_details" value="<%= @the_recipe.details %>"></textarea>
-        </div>
-
-        <div>
-          <label for="food_categories_box">
-            Food categories
-          </label>
-          <select id="food_categories_box" name="query_food_categories" value="<%= @the_recipe.food_categories %>">
-            <option>Pastries</option>
-            <option>Soup</option>
-            <option>Pasta</option>
-            <option>Pizza</option>
-            <option>Stew</option>
-            <option>Salad</option>
-          </select>
-        </div>
-
+        <input type="text" id="amount_box" name="query_amount" placeholder="How much to use...">
+          
         <button>
-          Update recipe
+          Add ingredient
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   <% else %>
-    <div></div>
+      <div></div>
   <% end %>
-</div>
+<% end %>
+ 
+
+
+<% if @current_user == nil %>
+  <div></div>
+<% else %>
+  <div>
+    <% if @current_user.id == @the_recipe.user_id %>  
+      <div>
+        <h2>
+          Edit recipe
+        </h2>
+
+        <form action="/modify_recipe/<%= @the_recipe.id %>"  method="post" >
+          <div>
+            <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @the_recipe.user_id %>">
+          </div>
+
+          <div>
+            <label for="details_box">
+              Details
+            </label>
+
+            <textarea type="text" id="details_box" name="query_details" value="<%= @the_recipe.details %>"></textarea>
+          </div>
+
+          <div>
+            <label for="food_categories_box">
+              Food categories
+            </label>
+            <select id="food_categories_box" name="query_food_categories" value="<%= @the_recipe.food_categories %>">
+              <option>Pastries</option>
+              <option>Soup</option>
+              <option>Pasta</option>
+              <option>Pizza</option>
+              <option>Stew</option>
+              <option>Salad</option>
+              <option>Grill</option>
+              <option>Fried</option>
+            </select>
+          </div>
+
+          <button>
+            Update recipe
+          </button>
+        </form>
+      </div>
+    <% else %>
+      <div></div>
+    <% end %>
+  </div>
+<% end %>
 
 <hr>

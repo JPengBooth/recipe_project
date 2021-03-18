@@ -1,6 +1,6 @@
 class AllergiesController < ApplicationController
   def index
-    matching_allergies = Allergy.all
+    matching_allergies = Allergy.where({ :user_id => @current_user.id})
 
     @list_of_allergies = matching_allergies.order({ :created_at => :desc })
 

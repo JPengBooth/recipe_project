@@ -21,13 +21,13 @@ class UsagesController < ApplicationController
     the_usage = Usage.new
     the_usage.recipe_id = params.fetch("query_recipe_id")
     the_usage.ingredient_id = params.fetch("query_ingredient_id")
-    the_usage.amount = params.fetch("query_amount")
+    the_usage.amount = params.fetch("query_amount") 
 
     if the_usage.valid?
       the_usage.save
-      redirect_to("/usages", { :notice => "Usage created successfully." })
+      redirect_to("/recipes/#{the_usage.recipe_id}", { :notice => "Usage created successfully." })
     else
-      redirect_to("/usages", { :notice => "Usage failed to create successfully." })
+      redirect_to("/recipes/#{the_usage.recipe_id}", { :notice => "Usage failed to create successfully." })
     end
   end
 
